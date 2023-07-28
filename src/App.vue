@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div id="app">
     <router-view></router-view>
   </div>
 </template>
+
+
 
 <style lang="scss">
 * {
@@ -10,7 +12,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  line-height: 1.5;
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -22,7 +30,6 @@
 
 #nav {
   padding: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -33,5 +40,3 @@
   }
 }
 </style>
-<script lang="ts">
-</script>
