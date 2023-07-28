@@ -1,13 +1,17 @@
 <template>
   <div>
     statistics.vue
+    <Nav />
   </div>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
 
-@Component({})
+
+@Component({
+  components: {}
+})
 export default class Statistics extends Vue {
 
 }
