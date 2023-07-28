@@ -1,4 +1,7 @@
 module.exports = {
+  // "globals":{
+  //   "__WebpackModuleApi":"writable"
+  // },
   root: true,
   env: {
     node: true
@@ -17,7 +20,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     'globals': {
       "__WebpackModuleApi": true
-    }
+    },
   },
   overrides: [
     {

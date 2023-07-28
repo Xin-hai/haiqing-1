@@ -1,29 +1,31 @@
 <template>
   <div class="nav">
     <router-link to="/money">
-      <svg>
-        <use xlink:href="#labels"></use>
-      </svg>
+      <Icons name="money" />
       记账
     </router-link>
     |
-    <router-link to="/labels">标签</router-link>
+    <router-link to="/labels">
+      <Icons name="labels" />
+      标签
+    </router-link>
     |
-    <router-link to="/statistics">统计</router-link>
+    <router-link to="/statistics">
+      统计
+    <Icons name="statistics" />
+    </router-link>
   </div>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext)
-try {
-  importAll(require.context('../assets/icons',true,/\.svg$/))
-} catch(error){
-  console.log(error)
-}
+import Icons from '@/components/Icons.vue';
 
 
-@Component({})
+
+@Component({
+  components: {Icons}
+})
 export default class Nav extends Vue {
 
 }
