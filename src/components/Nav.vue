@@ -19,6 +19,6 @@ export default class Nav extends Vue {
 
 <style  lang="scss" scoped>
   .nav {
-    border: 1px solid red;
+
   }
 </style>
