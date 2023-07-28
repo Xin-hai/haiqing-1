@@ -7,6 +7,13 @@
   </div>
 </template>
 
+<script lang="ts">
+
+export default {
+ name: 'Layout'
+}
+</script>
+
 <style scoped lang="scss">
 .nav-wrapper {
   border: 1px solid red;
