@@ -15,8 +15,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #333;
+  font-size: 16px;
 }
 
 #app{
