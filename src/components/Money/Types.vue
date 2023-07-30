@@ -8,20 +8,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {Component} from 'vue-property-decorator';
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Types extends Vue {
-  type = '-'  // '-'表示支出，'+'表示收入
-  selectType(type: string){
-      if(type !== '+' && type !== '-'){
-        console.error('this type is unKnow')
-      }
-      this.type = type
-    }
-}
+  type: string = '-';  // '-'表示支出，'+'表示收入
 
+  selectType(type: string) {
+    if (type !== '+' && type !== '-') {
+      console.error('this type is unKnow');
+    }
+    this.type = type;
+  }
+
+}
 </script>
 
 <style scoped lang="scss">
