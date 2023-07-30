@@ -1,31 +1,53 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
+      <li v-for="tag in dataSource" :key="tag"
+          @click="toggle(tag)"
+          :class="{selected: selectedTags.indexOf(tag)>= 0}">{{ tag }}
+      </li>
+
     </ul>
     <div class="newTag">
-      <button>新增标签</button>
+      <button @click="create">新增标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
+import {Vue, Component, Prop} from 'vue-property-decorator';
 
 @Component({})
 export default class Tags extends Vue {
+  @Prop(Array) readonly dataSource: string[] | undefined;
+  selectedTags: string[] = [];
+
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag);
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1);
+    } else {
+      this.selectedTags.push(tag);
+    }
+  }
+
+  create() {
+    const name = window.prompt('请输入新的标签名');
+    if (name === '') {
+      window.alert('标签名不能为空');
+    }if(name && name.length >=20){
+      window.alert('标签名不能超过20个字符，请重新输入');
+    }
+    else if (this.dataSource) {
+      this.$emit('update:dataSource', [...this.dataSource, name]);
+    }
+  }
 
 }
 </script>
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper";
+
 .tags {
   flex-grow: 1;
   font-size: 14px;
@@ -34,6 +56,7 @@ export default class Tags extends Vue {
   > .current {
     display: flex;
     flex-wrap: wrap;
+
     > li {
       background: #d9d9d9;
       height: 24px;
@@ -44,6 +67,11 @@ export default class Tags extends Vue {
       padding: 0 16px;
       margin-right: 16px;
       margin-top: 6px;
+
+      &.selected {
+        background: $color-hq;
+        color: #fff;
+      }
     }
   }
 
@@ -53,7 +81,7 @@ export default class Tags extends Vue {
     > button {
       border: none;
       color: #999;
-      border-bottom: 1px solid ;
+      border-bottom: 1px solid;
       background: transparent;
       padding: 0 4px;
     }

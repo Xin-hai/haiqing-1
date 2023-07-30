@@ -3,7 +3,7 @@
     <NumberPad />
     <Types />
     <Notes/>
-    <Tags />
+    <Tags :data-source.sync="tags"/>
   </Layout>
 </template>
 
@@ -27,7 +27,8 @@ import Tags from '@/components/Money/Tags.vue';
 })
 
 export default class Money extends Vue {
-
+  name = 'Money'
+  tags = ['服饰','餐饮','住宿','交通']
 }
 </script>
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{value}}
     <label class="notes">
       <span class="name">备注</span>
       <input type="text" v-model="value" placeholder="请在此输入账单备注" >

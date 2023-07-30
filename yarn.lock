@@ -3658,15 +3658,10 @@
   "resolved" "https://registry.npmmirror.com/core-js/-/core-js-2.6.12.tgz"
   "version" "2.6.12"
 
-"core-js@^3.15.2":
-  "integrity" "sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q=="
-  "resolved" "https://registry.npmmirror.com/core-js/-/core-js-3.15.2.tgz"
-  "version" "3.15.2"
-
-"core-js@^3.6.5":
-  "integrity" "sha512-2sKLtfq1eFST7l7v62zaqXacPc7uG8ZAya8ogijLhTtaKNcpzpB4TMoTw2Si+8GYKRwFPMMtUT0263QFWFfqyQ=="
-  "resolved" "https://registry.npmmirror.com/core-js/-/core-js-3.31.1.tgz"
-  "version" "3.31.1"
+"core-js@^3.32.0", "core-js@^3.6.5":
+  "integrity" "sha512-rd4rYZNlF3WuoYuRIDEmbR/ga9CeuWX9U05umAvgrrZoHY4Z++cp/xwPQMvUpBB4Ag6J8KfD80G0zwCyaSxDww=="
+  "resolved" "https://registry.npmmirror.com/core-js/-/core-js-3.32.0.tgz"
+  "version" "3.32.0"
 
 "core-util-is@~1.0.0":
   "integrity" "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ=="
