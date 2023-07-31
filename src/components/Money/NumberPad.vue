@@ -15,7 +15,7 @@
       <button @click="inputContent">9</button>
       <button class="ok" @click="ok">ok</button>
       <button @click="inputContent" class="zero">0</button>
-      <button @click="inputContent">.</button>
+      <button class ='dot' @click="inputContent">.</button>
     </div>
   </div>
 </template>
@@ -57,7 +57,10 @@ export default class NumberPad extends Vue {
   ok(){
     this.$emit('update:value',this.output)
     this.$emit('submit',this.output)
+    window.alert('您有一笔账单已记录在册')
+    this.output = '0'
   }
+
 }
 </script>
 
@@ -91,6 +94,11 @@ export default class NumberPad extends Vue {
         float: right;
       }
 
+      &.dot{
+        font-size: larger;
+        font-weight: bolder;
+      }
+
       &.zero {
         width: 50%;
       }
@@ -109,16 +117,20 @@ export default class NumberPad extends Vue {
         background: darken($bg, 2*5%);
       }
 
-      &:nth-child(4), &:nth-child(7), &:nth-child(10), &:nth-child(13) {
+      &:nth-child(4), &:nth-child(7), &:nth-child(10) {
         background: darken($bg, 3*5%);
       }
 
-      &:nth-child(8), &:nth-child(11), &:nth-child(14) {
-        background: darken($bg, 4*5%);
+      &:nth-child(14) {
+        background: darken($bg, 4*7%);
+      }
+
+      &:nth-child(8), &:nth-child(11) , &:nth-child(13){
+        background: darken($bg, 6*4%);
       }
 
       &:nth-child(12) {
-        background: darken($bg, 5*5%);
+        background: darken($bg, 30%);
       }
     }
   }

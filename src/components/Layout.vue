@@ -1,5 +1,7 @@
 <template>
+
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
+    <TopNav />
     <div class="content" :class=" classPrefix && `${classPrefix}-content`">
       <slot></slot>
     </div>
@@ -9,8 +11,11 @@
 
 <script lang="ts">
 
+import TopNav from '@/components/TopNav.vue';
+
 export default {
  name: 'Layout',
+  components: {TopNav},
   props: ['classPrefix']
 }
 </script>

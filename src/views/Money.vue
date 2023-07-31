@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix="layout">
-    {{record}}
+    {{recordList}}
     <NumberPad :value.sync="record.amount" @submit="savaRecord" />
     <Types :value.sync = "record.type" />
     <Notes @update:value="onUpdateNotes"/>
@@ -15,11 +15,14 @@ import Types from '@/components/Money/Types.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
 
+
+const recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]')
 type Record = {
   tags: string[]
   notes: string
   type: string
   amount: number
+  createdAt: Date | undefined
 }
 @Component({
   components: {Tags, Notes, Types, NumberPad}
@@ -27,9 +30,9 @@ type Record = {
 
 export default class Money extends Vue {
   tags = ['服饰','餐饮','住宿','交通']
-  recordList: Record[] = []
+  recordList: Record[] = recordList
   record: Record = {
-    tags: [], notes: '', type: '-',amount: 0
+    tags: [], notes: '', type: '-',amount: 0, createdAt: new Date(2023,8,1)
   }
   onUpdateTags(value: string[]){
     this.record.tags = value
@@ -38,9 +41,9 @@ export default class Money extends Vue {
     this.record.notes = value
   }
   savaRecord(){
-    const record2 = JSON.parse(JSON.stringify(this.record)) // 拷贝一份
+    const record2:Record = JSON.parse(JSON.stringify(this.record)) // 拷贝一份
+    record2.createdAt = new Date()
     this.recordList.push(record2)
-    console.log(this.recordList)
   }
 
   @Watch('recordList')
