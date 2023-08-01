@@ -1,5 +1,11 @@
 <template>
   <Layout>
+    <div>
+      <span>
+        <Icons name="left"/>
+        编辑标签
+      </span>
+    </div>
     编辑标签
   </Layout>
 </template>
@@ -12,13 +18,12 @@ import tagListModel from '@/models/tagListModel';
 export default class EditLabel extends Vue {
   created(){
     const id = this.$route.params.id
-    console.log(id)
-     tagListModel.fetch
+    tagListModel.fetch()
     const tags = tagListModel.data
-    const tag = tags.filter(t=>t.id === id)[0]
+    const tag = tags.find(t => t.id === id )
     if(tag){
-      console.log(tag);
-    }else {
+      console.log(tag)
+    }else{
       this.$router.replace('/404')
     }
   }
