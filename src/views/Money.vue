@@ -1,5 +1,7 @@
 <template>
+
   <Layout class-prefix="layout" title-name="记账">
+    {{record}}
     <NumberPad :value.sync="record.amount" @submit="savaRecord" />
     <Types :value.sync = "record.type" />
     <div class="notes">
