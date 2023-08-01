@@ -5,10 +5,12 @@ import router from './router';
 import store from './store';
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
+import Icons from '@/components/Icons.vue';
 
 Vue.config.productionTip = false;
 
 Vue.component('Nav', Nav)
+Vue.component('Icons',Icons)
 Vue.component('Layout', Layout)
 
 new Vue({
