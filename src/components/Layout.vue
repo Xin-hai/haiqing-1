@@ -1,6 +1,12 @@
 <template>
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
-    <div class="head">{{titleName}}</div>
+    <div class="head">
+
+      <Icons class="leftIcon" name="left" v-if="this.titleName === '编辑标签'"/>
+      <span class="leftIcon"  v-else></span>
+      <span class="title">{{titleName}}</span>
+      <span class="rightIcon"></span>
+    </div>
     <div class="content" :class=" classPrefix && `${classPrefix}-content`">
       <slot></slot>
     </div>
@@ -18,6 +24,10 @@ export default class Types extends Vue{
 
   @Prop() ['classPrefix']: string
   @Prop({required: true}) titleName!: string
+
+
+
+
 }
 </script>
 
@@ -34,13 +44,31 @@ export default class Types extends Vue{
     overflow-y: auto;
   }
   .head {
-    background: $color-hq;
-    height: 40px;
+    //background: $color-hq;
+    //height: 40px;
+    //text-align: center;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    //color: #fff;
     text-align: center;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: $color-hq;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: #fff;
+    justify-content: space-between;
+    > .title {
+
+    }
+    > .leftIcon {
+      width: 24px;
+      height: 24px;
+    }
+    > .rightIcon{
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 
