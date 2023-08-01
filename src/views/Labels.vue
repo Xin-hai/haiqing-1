@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout title-name="标签">
     <div class="tagList">
       <router-link v-for="tag in tags"
                    :key="tag.id"

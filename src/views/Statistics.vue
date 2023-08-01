@@ -1,5 +1,5 @@
 <template>
- <Layout>
+ <Layout title-name="统计">
    Statistics.vue
  </Layout>
 </template>

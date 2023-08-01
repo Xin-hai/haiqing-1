@@ -1,8 +1,8 @@
 <template>
-  <Layout class-prefix="layout">
+  <Layout class-prefix="layout" title-name="记账">
     <NumberPad :value.sync="record.amount" @submit="savaRecord" />
     <Types :value.sync = "record.type" />
-    <Notes @update:value="onUpdateNotes"/>
+    <Notes field-name="备注" placeholder="请您输入账单备注"  @update:value="onUpdateNotes"/>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
   </Layout>
 </template>

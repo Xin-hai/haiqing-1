@@ -1,7 +1,6 @@
 <template>
-
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
-    <TopNav />
+    <div class="head">{{titleName}}</div>
     <div class="content" :class=" classPrefix && `${classPrefix}-content`">
       <slot></slot>
     </div>
@@ -11,17 +10,20 @@
 
 <script lang="ts">
 
-import TopNav from '@/components/TopNav.vue';
+import {Vue, Component, Prop} from 'vue-property-decorator';
 
-export default {
- name: 'Layout',
-  components: {TopNav},
-  props: ['classPrefix']
+@Component
+
+export default class Types extends Vue{
+
+  @Prop() ['classPrefix']: string
+  @Prop({required: true}) titleName!: string
 }
 </script>
 
 
 <style scoped lang="scss">
+@import "~@/assets/style/helper";
 .layout-wrapper {
   display: flex;
   flex-direction: column;
@@ -30,6 +32,15 @@ export default {
   .content {
     flex-grow: 1;
     overflow-y: auto;
+  }
+  .head {
+    background: $color-hq;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
   }
 }
 
