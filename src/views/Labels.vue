@@ -1,8 +1,8 @@
 <template>
   <Layout>
     <ol class="tagList">
-      <li v-for="tag in tags" :key="tag">
-        <span>{{tag}}</span>
+      <li v-for="tag in tags" :key="tag.id">
+        <span>{{tag.name}}</span>
         <Icons name="right" />
       </li>
     </ol>
@@ -27,7 +27,7 @@ export default class Labels extends Vue {
     if(name){
      const message = tagListModel.create(name)
       if(message === 'duplicated'){
-        window.alert('标签名已存在')
+        window.alert('标签名已存在，请重新输入。')
       }else if(message === 'success'){
         window.alert('添加成功')
       }
