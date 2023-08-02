@@ -2,7 +2,9 @@
   <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
     <div class="head">
 
-      <Icons class="leftIcon" name="left" v-if="this.titleName === '编辑标签'"/>
+      <Icons class="leftIcon" name="left"
+             v-if="this.titleName === '编辑标签'"
+              @click.native="goBack"/>
       <span class="leftIcon"  v-else></span>
       <span class="title">{{titleName}}</span>
       <span class="rightIcon"></span>
@@ -24,10 +26,10 @@ export default class Types extends Vue{
 
   @Prop() ['classPrefix']: string
   @Prop({required: true}) titleName!: string
-
-
-
-
+  goBack(){
+    this.$router.back()
+    console.log('back')
+  }
 }
 </script>
 
@@ -44,13 +46,6 @@ export default class Types extends Vue{
     overflow-y: auto;
   }
   .head {
-    //background: $color-hq;
-    //height: 40px;
-    //text-align: center;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
-    //color: #fff;
     text-align: center;
     font-size: 16px;
     padding: 12px 16px;
@@ -64,6 +59,7 @@ export default class Types extends Vue{
     > .leftIcon {
       width: 24px;
       height: 24px;
+      color: #fff;
     }
     > .rightIcon{
       width: 24px;
