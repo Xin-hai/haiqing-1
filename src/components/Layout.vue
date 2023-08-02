@@ -28,7 +28,6 @@ export default class Types extends Vue{
   @Prop({required: true}) titleName!: string
   goBack(){
     this.$router.back()
-    console.log('back')
   }
 }
 </script>
