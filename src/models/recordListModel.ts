@@ -2,6 +2,7 @@ const localStorageKeyName = 'recordList';
 
 const recordListModel = {
     fetch() {
+        console.log(window.localStorage.getItem(localStorageKeyName))
         return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
     },
     save(data: RecordItem[]) {

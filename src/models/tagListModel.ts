@@ -1,8 +1,8 @@
 const localStorageKeyName = 'tagList';
 
 type Tag = {
-    id: string
-    name: string
+    id: string;
+    name: string;
 }
 type TagListModel = {
     data: Tag[]
@@ -22,7 +22,7 @@ const tagListModel: TagListModel = {
         if(names.indexOf(name)>=0){
             return 'duplicated'
         }
-        this.data.push({id:name,name:name})
+        this.data.push({id: name, name: name})
         this.save()
         return 'success'
     },

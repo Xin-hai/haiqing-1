@@ -18,7 +18,7 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 
 @Component({})
 export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource: string[] | undefined;
+  @Prop() readonly dataSource: string[] | undefined;
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -35,14 +35,14 @@ export default class Tags extends Vue {
     const name = window.prompt('请输入新的标签名');
     if (name === '') {
       window.alert('标签名不能为空');
-    }if(name && name.length >=20){
+    }else if(name && name.length >=20){
       window.alert('标签名不能超过20个字符，请重新输入');
     }
-    else if (this.dataSource) {
-      this.$emit('update:dataSource', [...this.dataSource, name]);
+    else if(this.dataSource) {
+      this.$emit('update:dataSource',
+          [...this.dataSource, name]);
     }
   }
-
 }
 </script>
 
