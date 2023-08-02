@@ -41,7 +41,6 @@ export default class Labels extends Vue {
       return window.alert('标签名不能超过16个字符，请重新输入');
     }
     this.$store.commit('createTag', name);
-
   }
 }
 </script>

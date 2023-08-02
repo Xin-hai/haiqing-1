@@ -25,6 +25,7 @@ import {Vue, Component} from 'vue-property-decorator';
 })
 export default class Tags extends Vue {
   selectedTags: string[] = [];
+
   beforeCreate(){
     this.$store.commit('fetchTags')
   }
@@ -46,7 +47,6 @@ export default class Tags extends Vue {
       return window.alert('标签名不能超过16个字符，请重新输入');
     }
     this.$store.commit('createTag', name)
-
   }
 }
 </script>
