@@ -7,14 +7,23 @@ import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icons from '@/components/Icons.vue';
 import TagListModel from '@/models/tagListModel';
+import tagListModel from '@/models/tagListModel';
 
 Vue.config.productionTip = false;
 
-Vue.component('Nav', Nav)
-Vue.component('Icons',Icons)
-Vue.component('Layout', Layout)
+Vue.component('Nav', Nav);
+Vue.component('Icons', Icons);
+Vue.component('Layout', Layout);
 
-window.tagList = TagListModel.fetch()
+window.tagList = TagListModel.fetch();
+window.createTag = (name: string) => {
+    const message = tagListModel.create(name);
+    if (message === 'duplicated') {
+        window.alert('标签名已存在，请重新输入。');
+    } else if (message === 'success') {
+        window.alert('添加成功');
+    }
+};
 
 new Vue({
     router,
