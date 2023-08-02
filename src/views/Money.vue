@@ -18,11 +18,15 @@ import Tags from '@/components/Money/Tags.vue';
 import store from '@/store/index2'
 
 @Component({
-  components: {Tags,  FormItem, Types, NumberPad}
+  components: {Tags,  FormItem, Types, NumberPad},
+  computed:{
+    recordList(){
+      return  store.recordList;
+    }
+  }
 })
 
 export default class Money extends Vue {
-  recordList = store.recordList
   record: RecordItem = {
     tags: [], notes: '', type: '-',amount: 0, createdAt: new Date(2023,8,1)
   }

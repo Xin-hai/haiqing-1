@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import store from '@/store/index2';
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import {Vue, Component} from 'vue-property-decorator';
 
 @Component({})
 export default class Tags extends Vue {
