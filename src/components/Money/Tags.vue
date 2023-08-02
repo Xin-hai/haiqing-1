@@ -17,14 +17,12 @@
 import {Vue, Component} from 'vue-property-decorator';
 
 @Component({
-  computed: {
-    tagList(){
-      return this.$store.state.tagList
-    }
-  }
 })
 export default class Tags extends Vue {
   selectedTags: string[] = [];
+  get tagList(){
+    return this.$store.state.tagList
+  }
 
   beforeCreate(){
     this.$store.commit('fetchTags')
