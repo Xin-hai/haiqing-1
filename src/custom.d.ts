@@ -15,10 +15,13 @@ type TagListModel = {
     create: (name: string) => 'success' | 'duplicated' // success表示成功，duplicated表示内容重复
     save: () => void
     remove: (id: string) => boolean
-    update: (id: string,name: string) => 'success' | 'not found' | 'duplicated'
+    update: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
 }
 
 interface  Window {
-    tagList: Tag[]
+    tagList: Tag[] | undefined
+    findTag: (id: string) => Tag | undefined
     createTag: (name: string) => void
+    removeTag: (id: string) => boolean
+    updateTag: TagListModel['update'] // 相当(id: string, name: string) => 'success' | 'not found' | 'duplicated'
 }
