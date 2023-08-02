@@ -14,12 +14,18 @@
 </template>
 
 <script lang="ts">
-import store from '@/store/index2';
 import {Vue, Component} from 'vue-property-decorator';
 
-@Component({})
+@Component({
+  computed: {
+    tagList(){
+      // return this.$store.fetchTags()
+      // ToDO
+      return []
+    }
+  }
+})
 export default class Tags extends Vue {
-  tagList = store.fetchTags()
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -40,9 +46,10 @@ export default class Tags extends Vue {
     }else if(name && name.length >=16){
       return window.alert('标签名不能超过16个字符，请重新输入');
     }
-    else if(this.tagList) {
-      store.createTag(name)
-    }
+    // else if(this.tagList) {
+    // ToDO
+    //   // store.createTag(name)
+    // }
   }
 }
 </script>
