@@ -19,15 +19,15 @@ import {Vue, Component} from 'vue-property-decorator';
 @Component({
   computed: {
     tagList(){
-      // return this.$store.fetchTags()
-      // ToDO
-      return []
+      return this.$store.state.tagList
     }
   }
 })
 export default class Tags extends Vue {
   selectedTags: string[] = [];
-
+  beforeCreate(){
+    this.$store.commit('fetchTags')
+  }
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -42,14 +42,11 @@ export default class Tags extends Vue {
     const name = window.prompt('请输入新的标签名');
     if (!name) {
       return window.alert('标签名不能为空');
-
     }else if(name && name.length >=16){
       return window.alert('标签名不能超过16个字符，请重新输入');
     }
-    // else if(this.tagList) {
-    // ToDO
-    //   // store.createTag(name)
-    // }
+    this.$store.commit('createTag', name)
+
   }
 }
 </script>
