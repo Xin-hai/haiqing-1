@@ -5,8 +5,8 @@
                    :key="tag.id"
                    class="tag"
                    :to="`/labels/edit/${tag.id}`">
-        <span>{{tag.name}}</span>
-        <Icons name="right" />
+        <span>{{ tag.name }}</span>
+        <Icons name="right"/>
       </router-link>
     </div>
     <div class="createTagWrapper">
@@ -18,58 +18,72 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import Button from '@/components/Button.vue'
+import Button from '@/components/Button.vue';
 
 @Component({
-  components: {Button}
+  components: {Button},
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    }
+  }
 })
 export default class Labels extends Vue {
-  // TODO
-  tags = [] // odlStore.tagList
+  created() {
+    this.$store.commit('fetchTags'); // 再次获取数据
+  }
+
   createTag() {
-    const name = window.prompt('请输入新的标签名')
-    if (name) {
-      // TODO
-      // odlStore.createTag(name)
+    const name = window.prompt('请输入新的标签名');
+    if (!name) {
+      return window.alert('标签名不能为空');
+    } else if (name && name.length >= 16) {
+      return window.alert('标签名不能超过16个字符，请重新输入');
     }
+    this.$store.commit('createTag', name);
+
   }
 }
 </script>
 
 <style scoped lang="scss">
 @import "~@/assets/style/helper";
-  .tagList {
-    text-align: center;
-    background: #fff;
-    padding-left: 16px;
-    > .tag {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e6e6e6;
-      min-height: 44px;
-      svg {
-        margin-right: 18px;
-        width: 18px;
-        height: 18px;
-        color: #666;
-      }
-    }
-  }
 
-  .createTagWrapper{
-    text-align: center;
-    padding: 16px;
-    margin-top: 40-16px;
-    .createTag{
-      height: 40px;
-      border-radius: 4px;
-      background: $color-hq;
-      padding: 0 16px;
-      border: none;
-      color: #fff;
+.tagList {
+  text-align: center;
+  background: #fff;
+  padding-left: 16px;
+
+  > .tag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e6e6e6;
+    min-height: 44px;
+
+    svg {
+      margin-right: 18px;
+      width: 18px;
+      height: 18px;
+      color: #666;
     }
   }
+}
+
+.createTagWrapper {
+  text-align: center;
+  padding: 16px;
+  margin-top: 40-16px;
+
+  .createTag {
+    height: 40px;
+    border-radius: 4px;
+    background: $color-hq;
+    padding: 0 16px;
+    border: none;
+    color: #fff;
+  }
+}
 
 
 </style>
