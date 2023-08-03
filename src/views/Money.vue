@@ -24,13 +24,13 @@ import recordTypeList from '@/consts/recordTypeList';
 
 export default class Money extends Vue {
   record: RecordItem = {
-    tags: [], notes: '', type: '-',amount: 0, createdAt: new Date(2023,8,1)
+    tags: [], notes: '', type: '-',amount: 0, createdAt: new Date(2023,8,1).toISOString()
   }
   get recordList(){
     return this.$store.state.recordList
   }
   recordTypeList = recordTypeList
-  created(){
+  beforeCreate(){
     this.$store.commit('fetchRecords')
   }
 
