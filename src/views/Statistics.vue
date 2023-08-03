@@ -3,16 +3,42 @@
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type" />
      <Tabs :data-source="intervalList" :value.sync="interval" class-prefix="interval" />
         <ol>
-          <li v-for="(group, index) in result" :key="index">
-            {{group.title}}
+          <li v-for="(group, index) in result" :key="index" >
+            <h3 class="title">{{group.title}}</h3>
             <ol>
-              <li v-for="item in group.items" :key="item['id']">{{item.amount}} |  {{item.createdAt}}</li>
+              <li v-for="item in group.items" :key="item['id']" class="record">
+                <span>{{tagString(item.tags)}}</span>
+                <span class="item-notes">{{item.notes}}</span>
+                <span>{{item.amount}}￥</span>
+              </li>
             </ol>
           </li>
         </ol>
     </Layout>
 
 </template>
+<style lang="scss" scoped>
+%item {
+  padding: 8px 16px;
+  line-height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  @extend %item;
+}
+.record {
+  @extend %item;
+  background: #fff;
+}
+.item-notes {
+  margin-right: auto;
+  margin-left: 16px;
+  color: #999;
+  font-size: 14px;
+}
+</style>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
@@ -24,6 +50,9 @@ import recordTypeList from '@/consts/recordTypeList';
   components: {Tabs}
 })
 export default class Statistics extends Vue {
+  tagString(tags: Tag[]){
+    return tags.length === 0 ? '无' : tags.join(',')
+  }
   get recordList(){
     return (this.$store.state as RootState).recordList
   }
