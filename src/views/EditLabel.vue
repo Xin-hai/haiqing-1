@@ -1,7 +1,7 @@
 <template>
   <Layout title-name="编辑标签">
     <div class="form-wrapper">
-      <FormItem :value="currentTag.name"
+      <FormItem :value="currentTag['name']"
                 @update:value="updateTag"
                 field-name="标签名" placeholder="请输入标签名"/>
     </div>
@@ -34,7 +34,6 @@ export default class EditLabel extends Vue {
   }
 
   updateTag(name: string){
-    console.log(name);
     if(this.currentTag) {
       this.$store.commit('updateTag',{id: this.currentTag.id, name: name})
     }
@@ -42,8 +41,6 @@ export default class EditLabel extends Vue {
   remove(){
     if(this.currentTag){
       this.$store.commit('removeTag',this.currentTag.id)
-      // TODO
-
     }
   }
 }
