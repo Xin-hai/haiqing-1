@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/my-project/'
+        ? '/haiqing-1-website/'
         : '/',
     lintOnSave: false,
     chainWebpack: config => {
