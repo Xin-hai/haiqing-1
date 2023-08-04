@@ -4,9 +4,11 @@
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type" />
     <div class="notes">
-      <FormItem field-name="备注" placeholder="请您输入账单备注"  @update:value="onUpdateNotes"/>
+      <FormItem field-name="备注" placeholder="请您输入账单备注"
+                @update:value="onUpdateNotes"
+                :value="record.notes"/>
     </div>
-    <Tags  />
+    <Tags  @update:value="record.tags=$event" :value="record.tags"/>
   </Layout>
 </template>
 
@@ -38,7 +40,14 @@ export default class Money extends Vue {
     this.record.notes = value
   }
   savaRecord(){
+    if(!this.record || this.record.tags.length ==0){
+     return window.alert('请至少选择一个标签')
+    }
     this.$store.commit('createRecord', this.record);
+    if(this.$store.state.createRecordError === null){
+      window.alert('您有一笔账单已记录在册')
+      this.record.notes = ''
+    }
   }
 }
 

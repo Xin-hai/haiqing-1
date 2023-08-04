@@ -58,7 +58,7 @@ export default class NumberPad extends Vue {
    const number = parseFloat(this.output)
     this.$emit('update:value',number)
     this.$emit('submit', number)
-    window.alert('您有一笔账单已记录在册')
+    // window.alert('您有一笔账单已记录在册')
     this.output = '0'
   }
 

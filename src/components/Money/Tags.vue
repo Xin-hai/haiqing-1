@@ -2,8 +2,8 @@
   <div class="tags">
     <ul class="current">
       <li v-for="tag in tagList" :key="tag.id"
-          @click="toggle(tag.id)"
-          :class="{selected: selectedTags.indexOf(tag.id)>= 0}">{{ tag.name }}
+          @click="toggle(tag)"
+          :class="{selected: selectedTags.indexOf(tag)>= 0}">{{ tag.name }}
       </li>
 
     </ul>
@@ -28,6 +28,7 @@ export default class Tags extends Vue {
     this.$store.commit('fetchTags')
   }
   toggle(tag: string) {
+    console.log('hi')
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
       this.selectedTags.splice(index, 1);
@@ -72,7 +73,6 @@ export default class Tags extends Vue {
       padding: 0 16px;
       margin-right: 16px;
       margin-top: 6px;
-
       &.selected {
         background: $color-hq;
         color: #fff;

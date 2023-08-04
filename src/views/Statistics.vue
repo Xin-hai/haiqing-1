@@ -1,11 +1,11 @@
 <template>
     <Layout title-name="统计">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type" />
-        <ol>
+        <ol v-if="groupedList.length > 0">
           <li v-for="(group,index) in groupedList" :key="index" >
-            <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span>  </h3>
+            <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
             <ol>
-              <li v-for="item in group.items" :key="item['id']" class="record">
+              <li v-for="item in group.items" :key="item.id" class="record">
                 <span>{{tagString(item.tags)}}</span>
                 <span class="item-notes">{{item.notes}}</span>
                 <span>￥{{item.amount}}</span>
@@ -13,6 +13,10 @@
             </ol>
           </li>
         </ol>
+      <div v-else class="good-notice">
+        <span>目前无相关账单记录</span>
+        <img :src="require('../assets/images/crying.jpg')" alt="crying picture" title="crying">
+      </div>
     </Layout>
 
 </template>
@@ -46,18 +50,19 @@ export default class Statistics extends Vue {
     }
   }
   tagString(tags: Tag[]){
-    return tags.length === 0 ? '无' : tags.join(',')
+    console.log(tags)
+    return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，')
   }
   get recordList(){
     return (this.$store.state as RootState).recordList
   }
   get groupedList(){
     const {recordList} = this
-    if(recordList.length === 0){return [] as Result}
 
     const newList = clone(recordList)
         .filter(r =>r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf())
+    if(newList.length === 0){return [] as Result}
     type Result = {title: string,total?: number, items: RecordItem[] }[]
 
     const result: Result = [{title: dayjs(newList[0].createdAt).format('YYYY-MM-DD'), items: [ newList[0] ] }]
@@ -86,6 +91,12 @@ export default class Statistics extends Vue {
 
 <style scoped lang="scss">
 @import "~@/assets/style/helper";
+
+ .good-notice{
+   padding: 16px;
+   text-align: center;
+}
+
   ::v-deep {
     .type-tabs-item{
       border-top: 1px solid ;
