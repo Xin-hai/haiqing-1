@@ -46,6 +46,11 @@ export default class Tags extends Vue {
       return window.alert('标签名不能超过16个字符，请重新输入');
     }
     this.$store.commit('createTag', name)
+    if(this.$store.state.createTagError){
+      if(this.$store.state.createTagError.message === 'tag name duplicated'){
+        window.alert('标签名已存在，请重新输入。')
+      }
+    }
   }
 }
 </script>

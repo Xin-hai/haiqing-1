@@ -50,7 +50,6 @@ export default class Statistics extends Vue {
     }
   }
   tagString(tags: Tag[]){
-    console.log(tags)
     return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，')
   }
   get recordList(){
@@ -95,6 +94,11 @@ export default class Statistics extends Vue {
  .good-notice{
    padding: 16px;
    text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column-reverse;
+   font-size: 18px;
 }
 
   ::v-deep {
