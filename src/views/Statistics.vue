@@ -20,7 +20,6 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/consts/intervalList';
 import recordTypeList from '@/consts/recordTypeList';
 import dayjs from 'dayjs'
 import clone from '@/lib/clone';
@@ -54,7 +53,7 @@ export default class Statistics extends Vue {
   }
   get groupedList(){
     const {recordList} = this
-    if(recordList.length === 0){return []}
+    if(recordList.length === 0){return [] as Result}
 
     const newList = clone(recordList)
         .filter(r =>r.type === this.type)
@@ -74,8 +73,6 @@ export default class Statistics extends Vue {
      result.forEach(group =>{
       group.total = group.items.reduce((sum, item) => sum +item.amount, 0)
     })
-    console.log('----')
-    console.log(result);
     return result
   }
   created(){
