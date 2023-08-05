@@ -20,10 +20,27 @@ new Vue({
 }).$mount('#app');
 
 
-if(document.documentElement.clientWidth > 500){
+
+// 确保显示齐全
+// window.onload = function(){
+//     setTimeout(function(){
+//         window.scrollTo(0,10000)
+//         // console.log('------')
+//     }, 0)
+// }
+
+window.addEventListener('load',()=>{
+    setTimeout(function(){
+        window.scrollTo(0,10000)
+    }, 2000)
+})
+
+// 二维码预览
+if(document.documentElement.clientWidth > 420){
     window.alert('请使用手机打开此网站，以保证浏览效果')
     const img = document.createElement('img')
-    img.src = require('../public/qrcode.png'),
+    // img.src = require('../public/qrcode.png')
+    img.src = './qrcode.png'
     img.style.position = 'fixed'
     img.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)'
     img.style.left = '50%'
@@ -31,9 +48,3 @@ if(document.documentElement.clientWidth > 500){
     img.style.transform = 'translate(-50%,-50%)'
     document.body.appendChild(img)
 }
-
-// window.onload = function(){
-//     setTimeout(function(){
-//         window.scrollTo(0,10000)
-//     }, 3000)
-// }

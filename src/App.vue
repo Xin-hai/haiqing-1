@@ -18,8 +18,11 @@ body {
   background: #f5f5f5;
 }
 
-#app{
-
+@media (min-width: 420px){
+  #app{
+    max-width: 420px;
+    margin: 0 auto;
+  }
 }
 
 </style>
