@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <div class="output"> {{ output }}元</div>
+    <div class="output"> {{ output.replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3") }}元</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -27,6 +27,7 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 export default class NumberPad extends Vue {
  @Prop(Number) readonly value!:number
   output = this.value.toString()
+
   inputContent(event: MouseEvent){
     const button = (event.target as HTMLButtonElement)
     const input = button.textContent!
