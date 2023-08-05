@@ -1,7 +1,9 @@
 <template>
     <Layout title-name="统计">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type" />
-      <Chart :options="x" />
+      <div class="chartWrapper" ref="wrapper">
+        <Chart :options="x" class="myChart" />
+      </div>
         <ol v-if="groupedList.length > 0">
           <li v-for="(group,index) in groupedList" :key="index" >
             <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
@@ -65,6 +67,12 @@ export default class Statistics extends Vue {
       tooltip: {
         show: true
       },
+      grid: {
+        left: 0,
+        top: 40,
+        bottom: 40,
+        right: 0,
+      },
       xAxis: {
         type: 'category',
         data: [
@@ -74,7 +82,8 @@ export default class Statistics extends Vue {
         ]
       },
       yAxis: {
-        type: 'value'
+        type: 'value',
+        show: false
       },
       series: [
         {
@@ -113,6 +122,9 @@ export default class Statistics extends Vue {
       group.total = group.items.reduce((sum, item) => sum +item.amount, 0)
     })
     return result
+  }
+  mounted(){
+    (this.$refs.wrapper as HTMLDivElement).scrollLeft = 10000
   }
   created(){
     this.$store.commit('fetchRecords')
@@ -170,4 +182,14 @@ export default class Statistics extends Vue {
   color: #999;
   font-size: 14px;
 }
+.myChart {
+  width: 430%;
+}
+.chartWrapper {
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 </style>
