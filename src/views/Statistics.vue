@@ -1,11 +1,12 @@
 <template>
     <Layout title-name="统计">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type" />
+      <Chart :options="x" />
         <ol v-if="groupedList.length > 0">
           <li v-for="(group,index) in groupedList" :key="index" >
             <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
             <ol>
-              <li v-for="item in group.items" :key="item.id" class="record">
+              <li v-for="item in group.items" :key="item['id']" class="record">
                 <span>{{tagString(item.tags)}}</span>
                 <span class="item-notes">{{item.notes}}</span>
                 <span>￥{{item.amount}}</span>
@@ -27,10 +28,13 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/consts/recordTypeList';
 import dayjs from 'dayjs'
 import clone from '@/lib/clone';
+// import _ from 'lodash'
+// import * as echarts from 'echarts'
+import Chart from '@/components/Chart.vue'
 
 
 @Component({
-  components: {Tabs}
+  components: {Chart,Tabs}
 })
 
 export default class Statistics extends Vue {
@@ -55,6 +59,37 @@ export default class Statistics extends Vue {
   get recordList(){
     return (this.$store.state as RootState).recordList
   }
+
+  get x(){
+    return {
+      tooltip: {
+        show: true
+      },
+      xAxis: {
+        type: 'category',
+        data: [
+            '1', '2', '3', '4', '5', '6', '7','8','9','10',
+          '11', '12', '13', '14', '15', '16', '17','18','19','20',
+          '21', '22', '23', '24', '25', '26', '27','28','29','30',
+        ]
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [
+              10,20,30,10,50,20,10,30,50,40,
+            10,20,30,10,50,20,10,30,50,40,
+            10,20,30,10,50,20,10,30,50,40,
+          ],
+          type: 'line',
+          smooth: true
+        }
+      ]
+    }
+  }
+
   get groupedList(){
     const {recordList} = this
 
@@ -125,7 +160,7 @@ export default class Statistics extends Vue {
 .record {
   @extend %item;
   background: #fff;
-  padding-left: 24px;
+  padding-left: 16px;
   padding-right: 16px;
 }
 .item-notes {

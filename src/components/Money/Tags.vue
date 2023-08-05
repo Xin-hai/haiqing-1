@@ -28,7 +28,6 @@ export default class Tags extends Vue {
     this.$store.commit('fetchTags')
   }
   toggle(tag: string) {
-    console.log('hi')
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
       this.selectedTags.splice(index, 1);

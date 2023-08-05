@@ -35,7 +35,8 @@ export default class NumberPad extends Vue {
     if(this.output === '0'){
       if ('1234567890'.indexOf(input) < 0) {
         this.output += input;
-      } else {
+      }
+      else {
         this.output = input;
       }
       return;
@@ -56,6 +57,11 @@ export default class NumberPad extends Vue {
    this.output = '0'
   }
   ok(){
+   if(this.output === '0' || this.output === '0.0'  || this.output === '0.00' ){
+     this.clear()
+     window.alert('金额不能为0')
+     return
+   }
    const number = parseFloat(this.output)
     this.$emit('update:value',number)
     this.$emit('submit', number)

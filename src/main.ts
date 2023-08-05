@@ -32,7 +32,7 @@ new Vue({
 window.addEventListener('load',()=>{
     setTimeout(function(){
         window.scrollTo(0,10000)
-    }, 2000)
+    }, 0)
 })
 
 // 二维码预览
