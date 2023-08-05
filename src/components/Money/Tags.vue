@@ -40,7 +40,7 @@ export default class Tags extends Vue {
 
   create() {
     const name = window.prompt('请输入新的标签名');
-    if (!name) {
+    if (!name || name === '') {
       return window.alert('标签名不能为空');
     }else if(name && name.length >=16){
       return window.alert('标签名不能超过16个字符，请重新输入');
