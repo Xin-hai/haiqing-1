@@ -64,12 +64,16 @@ export default class Statistics extends Vue {
 
   get x(){
     return {
+      title: {text: '海青记账',right: '9%',top: 10,textStyle:{color: '#22a2c3'}},
       tooltip: {
-        show: true
+        show: true,
+        triggerOn: 'click',
+        formatter: '{c}',
+        position: 'top'
       },
       grid: {
         left: 0,
-        top: 40,
+        top: 60,
         bottom: 40,
         right: 0,
       },
@@ -79,14 +83,31 @@ export default class Statistics extends Vue {
             '1', '2', '3', '4', '5', '6', '7','8','9','10',
           '11', '12', '13', '14', '15', '16', '17','18','19','20',
           '21', '22', '23', '24', '25', '26', '27','28','29','30',
-        ]
+        ],
+        axisTick: {
+          show: true,
+          alignWithLabel: true
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#666'
+          }
+        }
       },
       yAxis: {
         type: 'value',
         show: false
       },
-      series: [
-        {
+      series: [{
+        symbol: 'circle',
+        symbolSize: 10,
+        itemStyle: {
+          borderWidth: 10,
+          color: '#22a2c3'
+        },
+        lineStyle: {
+          width: 3
+        },
           data: [
               10,20,30,10,50,20,10,30,50,40,
             10,20,30,10,50,20,10,30,50,40,
@@ -94,8 +115,7 @@ export default class Statistics extends Vue {
           ],
           type: 'line',
           smooth: true
-        }
-      ]
+        }]
     }
   }
 
@@ -124,7 +144,8 @@ export default class Statistics extends Vue {
     return result
   }
   mounted(){
-    (this.$refs.wrapper as HTMLDivElement).scrollLeft = 10000
+    const div = (this.$refs.wrapper as HTMLDivElement)
+    div.scrollLeft = div.scrollWidth
   }
   created(){
     this.$store.commit('fetchRecords')

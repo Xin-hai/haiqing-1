@@ -12,7 +12,6 @@ export default class Chart extends Vue {
   @Prop() options?: EChartsOption
 
   mounted(){
-    console.log(echarts)
     if(this.options === undefined){
       return console.error('options 为空')
     }
@@ -26,7 +25,6 @@ export default class Chart extends Vue {
 
 <style scoped lang="scss">
   .wrapper {
-    border: 1px solid red;
     height: 50vh;
   }
 </style>
