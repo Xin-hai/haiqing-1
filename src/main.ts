@@ -41,10 +41,12 @@ if(document.documentElement.clientWidth > 420){
     const img = document.createElement('img')
     // img.src = require('../public/qrcode.png')
     img.src = './qrcode.png'
+    img.style.width= '120px'
+    img.style.height= '120px'
     img.style.position = 'fixed'
     img.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)'
-    img.style.left = '50%'
-    img.style.top = '50%'
+    img.style.left = '70%'
+    img.style.top = '34%'
     img.style.transform = 'translate(-50%,-50%)'
     document.body.appendChild(img)
 }
