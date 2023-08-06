@@ -36,8 +36,8 @@ window.onload = function (){
 
 // 二维码预览
 if(document.documentElement.clientWidth > 420){
-    window.alert(`该应用主要面向移动端用户，推荐您请使用手机扫描右侧二维码 \n 使用，以保证浏览效果！(*^▽^*) \n
-     \n 若您是开发人员，可以通过控制台调试的方式进行查看，谢谢(*^▽^*) `)
+    window.alert(`该应用主要面向移动端用户，推荐您请使用手机扫描内部右侧二维码 \n 使用，以保证浏览效果！(*^▽^*) \n
+     \n 若您是开发人员，可以通过控制台调试进行查看，谢谢！(*^▽^*) `)
     const img = document.createElement('img')
     // img.src = require('../public/qrcode.png')
     img.src = './qrcode.png'

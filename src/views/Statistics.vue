@@ -82,6 +82,11 @@ export default class Statistics extends Vue {
     const values = this.keyValuesList.map(item=>item.value)
     return {
       title: {text: '海青记账',right: '9%',top: 10,textStyle:{color: '#22a2c3'}},
+      legend: {
+        data: ['总计金额'],
+        right: 10,
+        top: 12
+      },
       tooltip: {
         show: true,
         triggerOn: 'click',
@@ -117,6 +122,7 @@ export default class Statistics extends Vue {
         show: false
       },
       series: [{
+        name: '总计金额',
         connectNulls: true,
         symbol: 'circle',
         symbolSize: 10,
