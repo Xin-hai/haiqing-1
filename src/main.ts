@@ -34,8 +34,9 @@ window.onload = function (){
 //     }, 0)
 // })
 
+console.log(screen.width)
 // 二维码预览
-if(document.documentElement.clientWidth > 420){
+if(document.documentElement.clientWidth  > 500  &&  document.body.clientWidth > 500 && window.innerWidth > 500 && screen.width > 500 ) {
     window.alert(`该应用主要面向移动端用户，推荐您请使用手机扫描内部右侧二维码 \n 使用，以保证浏览效果！(*^▽^*) \n
      \n 若您是开发人员，可以通过控制台调试进行查看，谢谢！(*^▽^*) `)
     const img = document.createElement('img')
