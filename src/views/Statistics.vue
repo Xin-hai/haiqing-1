@@ -2,7 +2,7 @@
     <Layout title-name="统计">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type" />
       <div class="chartWrapper" ref="wrapper">
-        <Chart :options="x" class="myChart" />
+        <Chart :options="chartOptions" class="myChart" />
       </div>
         <ol v-if="groupedList.length > 0">
           <li v-for="(group,index) in groupedList" :key="index" >
@@ -30,7 +30,7 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/consts/recordTypeList';
 import dayjs from 'dayjs'
 import clone from '@/lib/clone';
-// import _ from 'lodash'
+import _ from 'lodash'
 // import * as echarts from 'echarts'
 import Chart from '@/components/Chart.vue'
 
@@ -62,7 +62,25 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList
   }
 
-  get x(){
+  get keyValuesList(){
+    const today = new Date()
+    const array = []
+    for(let i=0; i<=29; i++){
+      const dateString = dayjs(today)
+          .subtract(i,'day')
+          .format('YYYY-MM-DD')
+      array.push({key: dateString, value: _.find(this.groupedList,{title:dateString})?.total
+      })
+    }
+    array.sort((a,b) =>{
+      return a.key > b.key ? 1 : a.key === b.key ? 0 : -1;
+    })
+    return array
+  }
+
+  get chartOptions(){
+   const keys = this.keyValuesList.map(item=>item.key)
+    const values = this.keyValuesList.map(item=>item.value)
     return {
       title: {text: '海青记账',right: '9%',top: 10,textStyle:{color: '#22a2c3'}},
       tooltip: {
@@ -79,14 +97,15 @@ export default class Statistics extends Vue {
       },
       xAxis: {
         type: 'category',
-        data: [
-            '1', '2', '3', '4', '5', '6', '7','8','9','10',
-          '11', '12', '13', '14', '15', '16', '17','18','19','20',
-          '21', '22', '23', '24', '25', '26', '27','28','29','30',
-        ],
+        data: keys,
         axisTick: {
           show: true,
           alignWithLabel: true
+        },
+        axisLabel: {
+          formatter: function (value: string, index:number) {
+            return value.substring(5)
+          }
         },
         axisLine: {
           lineStyle: {
@@ -106,13 +125,9 @@ export default class Statistics extends Vue {
           color: '#22a2c3'
         },
         lineStyle: {
-          width: 3
+          width: 2
         },
-          data: [
-              10,20,30,10,50,20,10,30,50,40,
-            10,20,30,10,50,20,10,30,50,40,
-            10,20,30,10,50,20,10,30,50,40,
-          ],
+          data: values,
           type: 'line',
           smooth: true
         }]
