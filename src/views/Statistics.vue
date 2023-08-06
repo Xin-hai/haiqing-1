@@ -117,6 +117,7 @@ export default class Statistics extends Vue {
         show: false
       },
       series: [{
+        connectNulls: true,
         symbol: 'circle',
         symbolSize: 10,
         itemStyle: {
