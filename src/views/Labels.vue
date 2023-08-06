@@ -35,8 +35,8 @@ export default class Labels extends Vue {
     const name = window.prompt('请输入新的标签名');
     if (!name) {
       return window.alert('标签名不能为空');
-    } else if (name && name.length >= 16) {
-      return window.alert('标签名不能超过16个字符，请重新输入');
+    } else if (name && name.length >= 10) {
+      return window.alert('标签名不能超过10个字符，请重新输入');
     }
     this.$store.commit('createTag', name);
     if(this.$store.state.createTagError){
