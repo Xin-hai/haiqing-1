@@ -6,7 +6,7 @@
       </div>
         <ol v-if="groupedList.length > 0">
           <li v-for="(group,index) in groupedList" :key="index" >
-            <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
+            <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total.toString().replace(/^(\-)*(\d+)\.(\d).*$/, "$1$2.$3")}}</span></h3>
             <ol>
               <li v-for="item in group.items" :key="item['id']" class="record">
                 <span>{{tagString(item.tags)}}</span>
@@ -31,7 +31,6 @@ import recordTypeList from '@/consts/recordTypeList';
 import dayjs from 'dayjs'
 import clone from '@/lib/clone';
 import _ from 'lodash'
-// import * as echarts from 'echarts'
 import Chart from '@/components/Chart.vue'
 
 
