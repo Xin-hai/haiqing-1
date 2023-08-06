@@ -102,7 +102,7 @@ export default class Statistics extends Vue {
           alignWithLabel: true
         },
         axisLabel: {
-          formatter: function (value: string, index:number) {
+          formatter: function (value: string) {
             return value.substring(5)
           }
         },

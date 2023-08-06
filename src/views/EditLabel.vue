@@ -53,7 +53,9 @@ export default class EditLabel extends Vue {
 
   save() {
     if (this.currentTag) {
-      if(this.$store.state.saveTagError === null){
+      if(!this.currentTag.name || this.currentTag.name ===''){
+        window.alert('当前的标签名为空，请重新输入')
+      }else if(this.$store.state.saveTagError === null){
         this.$store.commit('saveTags')
         window.alert('保存成功')
         router.back()
