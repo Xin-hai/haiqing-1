@@ -81,7 +81,7 @@ export default class Statistics extends Vue {
    const keys = this.keyValuesList.map(item=>item.key)
     const values = this.keyValuesList.map(item=>item.value)
     return {
-      title: {text: '海青记账',right: '9%',top: 10,textStyle:{color: '#22a2c3'}},
+      title: {text: '海青记账',right: '9.3%',top: 10,textStyle:{color: '#22a2c3'}},
       legend: {
         data: ['总计金额'],
         right: 10,
@@ -92,6 +92,9 @@ export default class Statistics extends Vue {
         triggerOn: 'click',
         formatter: '{c}',
         position: 'top'
+      },
+      label: {
+        show: false
       },
       grid: {
         left: 0,
@@ -107,9 +110,19 @@ export default class Statistics extends Vue {
           alignWithLabel: true
         },
         axisLabel: {
-          formatter: function (value: string) {
-            return value.substring(5)
+          interval: 0,
+          formatter: function (value:string, index:number) {
+            // 格式化成月/日，只在第一个刻度显示年份
+            let date = new Date(value);
+            let texts = [(date.getMonth() + 1), date.getDate()];
+            if (index === 29) {
+              texts.unshift(date.getFullYear());
+            }
+            return texts.join('.');
           }
+          // formatter: function (value: string) {
+          //   return value.substring(5)
+          // }
         },
         axisLine: {
           lineStyle: {
