@@ -13,7 +13,8 @@ const store =  new Vuex.Store({
     tagList: [] ,
     currentTag: undefined,
     createRecordError: null,
-    createTagError: null
+    createTagError: null,
+    saveTagError: null
   } as RootState ,
   mutations: {
     setCurrentTag(state,id: string){
@@ -64,9 +65,11 @@ const store =  new Vuex.Store({
         {
           const tag = state.tagList.find(item => item.id === id)
           tag!.name = name
-          store.commit('saveTags')
+         state.saveTagError = null
+          // store.commit('saveTags')
         }else{
-          window.alert('标签名已存在，请重新输入。')
+          state.saveTagError = Error('duplication')
+          // window.alert('标签名已存在，请重新输入。')
         }
       }
     },

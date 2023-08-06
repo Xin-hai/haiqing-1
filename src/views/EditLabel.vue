@@ -6,7 +6,11 @@
                 field-name="标签名" placeholder="请输入标签名"/>
     </div>
     <div class="button-wrapper">
-      <Button @click="remove">删除标签</Button>
+      <Button
+          class="save-button"
+          :value="currentTag['name']"
+          @click="save">保存</Button>
+      <Button @click="remove">删除</Button>
     </div>
   </Layout>
 </template>
@@ -15,32 +19,47 @@
 import {Vue, Component} from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
+import router from '@/router';
 
 @Component({
   components: {Button, FormItem},
 })
 export default class EditLabel extends Vue {
-  get currentTag(){
+  get currentTag() {
     return this.$store.state.currentTag
   }
 
   created() {
     const id = this.$route.params.id;
     this.$store.commit('fetchTags')
-    this.$store.commit('setCurrentTag',id)
+    this.$store.commit('setCurrentTag', id)
     if (!this.currentTag) {
       this.$router.replace('/404');
     }
   }
 
-  updateTag(name: string){
-    if(this.currentTag) {
-      this.$store.commit('updateTag',{id: this.currentTag.id, name: name})
+  updateTag(name: string) {
+    if (this.currentTag) {
+      this.$store.commit('updateTag', {id: this.currentTag.id, name: name})
     }
   }
-  remove(){
-    if(this.currentTag){
-      this.$store.commit('removeTag',this.currentTag.id)
+
+  remove() {
+    if (this.currentTag) {
+      this.$store.commit('removeTag', this.currentTag.id)
+      window.alert('删除成功')
+    }
+  }
+
+  save() {
+    if (this.currentTag) {
+      if(this.$store.state.saveTagError === null){
+        this.$store.commit('saveTags')
+        window.alert('保存成功')
+        router.back()
+      }else if((this.$store.state.saveTagError.message)=== 'duplication'){
+       window.alert('当前的标签名已存在，请重新输入')
+      }
     }
   }
 }
@@ -55,6 +74,10 @@ export default class EditLabel extends Vue {
     text-align: center;
     padding: 16px;
     margin-top: 44-16px;
+  }
+  .save-button {
+    background: #22a2c3;
+    margin-right: 60px;
   }
 
 </style>
