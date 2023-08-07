@@ -12,6 +12,7 @@
     "core-js": "^3.32.0",
     "dayjs": "^1.11.9",
     "echarts": "^5.4.3",
+    "element-ui": "^2.15.13",
     "loadsh": "^0.0.4",
     "lodash": "^4.17.21",
     "register-service-worker": "1.7.2",
