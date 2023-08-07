@@ -24,5 +24,11 @@ body {
     margin: 0 auto;
   }
 }
+@media screen and (max-width: 500px){
+  .el-message-box {
+    width: 90% !important; // 迫不得已使用
+  }
+}
+
 </style>
 
