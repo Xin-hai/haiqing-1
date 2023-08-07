@@ -8,7 +8,6 @@
 
     </ul>
     <div class="newTag">
-<!--      <button @click="create">新增标签 </button>-->
       <el-button type="text" @click="create" >新增标签</el-button>
     </div>
   </div>
@@ -57,7 +56,6 @@ export default class Tags extends Vue {
       });
       this.$store.commit('createTag', value)
     }).catch(() => {
-      // console.log('取消输入')
     })
   }
 }

@@ -46,21 +46,33 @@ export default class EditLabel extends Vue {
 
   remove() {
     if (this.currentTag) {
-      this.$store.commit('removeTag', this.currentTag.id)
-      window.alert('删除成功')
+      this.$confirm('此操作将永久删除该标签, 是否继续?', '海青记账提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$store.commit('removeTag', this.currentTag.id)
+      }).catch(() => {
+      })
     }
   }
 
   save() {
     if (this.currentTag) {
       if(!this.currentTag.name || this.currentTag.name ===''){
-        window.alert('当前的标签名为空，请重新输入')
-      }else if(this.$store.state.saveTagError === null){
+        this.$message({
+          type: 'warning',
+          message: '当前的标签名为空，请重新输入'
+        })
+      } else if(this.$store.state.saveTagError === null){
         this.$store.commit('saveTags')
-        window.alert('保存成功')
+        this.$message.success('保存成功')
         router.back()
       }else if((this.$store.state.saveTagError.message)=== 'duplication'){
-       window.alert('当前的标签名已存在，请重新输入')
+        this.$message({
+          type: 'warning',
+          message: '当前的标签名已存在，请重新输入'
+        })
       }
     }
   }
