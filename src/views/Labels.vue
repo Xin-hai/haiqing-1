@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="createTagWrapper">
-      <Button @click.native="createTag" class="createTag">新增标签</Button>
+      <el-button type="text" @click="createTag" class="createTag">新增标签</el-button>
     </div>
   </Layout>
 
@@ -18,12 +18,11 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import Button from '@/components/Button.vue';
+import { MessageBoxInputData } from 'element-ui/types/message-box';
 
-@Component({
-  components: {Button},
-})
+@Component({})
 export default class Labels extends Vue {
+
   get tags(){
     return this.$store.state.tagList;
   }
@@ -31,19 +30,23 @@ export default class Labels extends Vue {
     this.$store.commit('fetchTags'); // 再次获取数据
   }
 
-  createTag() {
-    const name = window.prompt('请输入新的标签名');
-    if (!name) {
-      return
-    } else if (name && name.length >= 10) {
-      return window.alert('标签名不能超过10个字符，请重新输入');
-    }
-    this.$store.commit('createTag', name);
-    if(this.$store.state.createTagError){
-      if(this.$store.state.createTagError.message === 'tag name duplicated'){
-        window.alert('标签名已存在，请重新输入。')
-      }
-    }
+  createTag(){
+    this.$prompt('请输入新的标签名', '海青记账提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      inputPattern: /^.{1,10}$/,
+      center: true,
+      inputErrorMessage: '标签名已存在或超过10个字符，请重新输入'
+    }).then(( res ) => {
+      const value = (res as MessageBoxInputData).value
+      this.$message({
+        type: 'success',
+        message: '您新建的标签名为: ' + value
+      });
+      this.$store.commit('createTag', value) // value就是原先的name this.$store.commit('createTag', name);
+    }).catch(() => {
+      // console.log('取消输入')
+    })
   }
 }
 </script>
