@@ -6,6 +6,10 @@ import store from './store';
 import Nav from '@/components/Nav.vue';
 import Layout from '@/components/Layout.vue';
 import Icons from '@/components/Icons.vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
@@ -34,7 +38,7 @@ window.onload = function (){
 //     }, 0)
 // })
 
-console.log(screen.width)
+
 // 二维码预览
 if(document.documentElement.clientWidth  > 500  &&  document.body.clientWidth > 500 && window.innerWidth > 500 && screen.width > 500 ) {
     window.alert(`该应用主要面向移动端用户，推荐您请使用手机扫描内部右侧二维码 \n 使用，以保证浏览效果！(*^▽^*) \n
